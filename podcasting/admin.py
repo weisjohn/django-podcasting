@@ -16,8 +16,8 @@ class ShowAdmin(admin.ModelAdmin):
     list_filter = ("title", "published", "site")
     admin_thumbnail = AdminThumbnail(image_field="admin_thumb_sm")
 
-    if can_tweet():
-        fields.append("tweet_text")
+    #if can_tweet():
+    #    fields.append("tweet_text")
 
     def published_flag(self, obj):
         return bool(obj.published)
@@ -36,8 +36,8 @@ class EpisodeAdmin(admin.ModelAdmin):
     list_filter = ("show", "published")
     admin_thumbnail = AdminThumbnail(image_field="admin_thumb_sm")
 
-    if can_tweet():
-        readonly_fields = ("tweet_text",)
+    #if can_tweet():
+    #    readonly_fields = ("tweet_text",)
 
     def published_flag(self, obj):
         return bool(obj.published)
