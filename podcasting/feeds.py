@@ -8,6 +8,7 @@ from django.contrib.syndication.views import Feed
 
 from podcasting.models import Enclosure, Show
 
+import settings
 
 class ITunesElements(object):
 
@@ -22,9 +23,9 @@ class ITunesElements(object):
         handler.addQuickElement(u"itunes:name", show.owner.get_full_name())
         handler.addQuickElement(u"itunes:email", show.owner.email)
         handler.endElement(u"itunes:owner")
-        handler.addQuickElement(u"itunes:image", attrs={"href": show.img_itunes_lg.url})
+        handler.addQuickElement(u"itunes:image", attrs={"href": settings.HACK_HOST + show.img_itunes_lg.url})
         handler.startElement(u"image", {})
-        handler.addQuickElement(u"url", show.img_itunes_sm.url)
+        handler.addQuickElement(u"url", settings.HACK_HOST + show.img_itunes_sm.url)
         handler.addQuickElement(u"title", self.feed["title"])
         handler.addQuickElement(u"link", self.feed["link"])
         handler.endElement(u"image")
@@ -59,9 +60,9 @@ class ITunesElements(object):
         handler.addQuickElement(u"itunes:explicit", episode.get_explicit_display())
         if episode.block:
             handler.addQuickElement(u"itunes:block", "yes")
-        handler.addQuickElement(u"itunes:image", attrs={"href": episode.img_itunes_lg.url})
+        handler.addQuickElement(u"itunes:image", attrs={"href": settings.HACK_HOST + episode.img_itunes_lg.url})
         handler.startElement(u"image", {})
-        handler.addQuickElement(u"url", episode.img_itunes_sm.url)
+        handler.addQuickElement(u"url", settings.HACK_HOST + episode.img_itunes_sm.url)
         handler.addQuickElement(u"title", episode.title)
         handler.addQuickElement(u"link", episode.get_absolute_url())
         handler.endElement(u"image")
